@@ -128,6 +128,7 @@ acción protocolo ip_origen puerto_origen -> ip_destino puerto_destino (opciones
 ```
 
 **Ejemplo básico:**
+
 ```
 alert tcp any any -> 192.168.1.0/24 22 (msg:"SSH connection detected"; sid:1000001;)
 ```
@@ -135,49 +136,63 @@ alert tcp any any -> 192.168.1.0/24 22 (msg:"SSH connection detected"; sid:10000
 ### 6.2. Componentes de una Regla
 
 #### **Acción (Action)**
+
 Define qué hacer cuando se activa la regla:
-- `alert` - Genera una alerta
-- `drop` - Descarta el paquete (modo IPS)
-- `reject` - Rechaza la conexión
-- `pass` - Permite el tráfico
+
+* `alert` - Genera una alerta
+* `drop` - Descarta el paquete (modo IPS)
+* `reject` - Rechaza la conexión
+* `pass` - Permite el tráfico
 
 #### **Protocolo (Protocol)**
+
 Tipo de protocolo de red:
-- `tcp` - Protocolo TCP
-- `udp` - Protocolo UDP
-- `icmp` - Protocolo ICMP
-- `ip` - Cualquier protocolo IP
+
+* `tcp` - Protocolo TCP
+* `udp` - Protocolo UDP
+* `icmp` - Protocolo ICMP
+* `ip` - Cualquier protocolo IP
 
 #### **Direcciones IP y Puertos**
-- `any` - Cualquier dirección o puerto
-- `$HOME_NET` - Variable para red local
-- `!$HOME_NET` - Negación (cualquier IP excepto HOME_NET)
-- `192.168.1.0/24` - Rango de red específico
-- `[80,443,8080]` - Lista de puertos específicos
-- `1:1024` - Rango de puertos
+
+* `any` - Cualquier dirección o puerto
+
+* `$HOME_NET` - Variable para red local
+* `!$HOME_NET` - Negación (cualquier IP excepto HOME_NET)
+* `192.168.1.0/24` - Rango de red específico
+* `[80,443,8080]` - Lista de puertos específicos
+* `1:1024` - Rango de puertos
 
 ### 6.3. Opciones Principales
 
 #### **msg (Mensaje)**
+
 Descripción de la alerta:
+
 ```
 msg:"Descripción del ataque detectado";
 ```
 
 #### **sid (Signature ID)**
+
 Identificador único de la regla:
+
 ```
 sid:1000001;
 ```
 
 #### **content (Contenido)**
+
 Busca contenido específico en el payload:
+
 ```
 content:"GET"; content:"/admin";
 ```
 
 #### **flow**
+
 Dirección del flujo de tráfico:
+
 ```
 flow:to_server,established;  # Tráfico hacia el servidor en conexión establecida
 flow:to_client;              # Tráfico hacia el cliente
@@ -185,7 +200,9 @@ flow:from_server;            # Tráfico desde el servidor
 ```
 
 #### **classtype**
+
 Categoriza el tipo de ataque:
+
 ```
 classtype:web-application-attack;
 classtype:trojan-activity;
@@ -195,37 +212,42 @@ classtype:policy-violation;
 ### 6.4. Ejemplos de Reglas Comunes
 
 #### **Detección de Escaneo de Puertos**
+
 ```
 alert tcp any any -> $HOME_NET any (msg:"Potential port scan detected"; flags:S; threshold: type both, track by_src, count 10, seconds 60; sid:1000002;)
 ```
 
 #### **Detección de SQL Injection**
+
 ```
 alert tcp any any -> $HOME_NET [80,443,8080] (msg:"SQL Injection attempt detected"; content:"UNION SELECT"; nocase; classtype:web-application-attack; sid:1000003;)
 ```
 
 #### **Detección de XSS**
+
 ```
 alert tcp any any -> $HOME_NET [80,443] (msg:"XSS attempt detected"; content:"<script>"; nocase; classtype:web-application-attack; sid:1000004;)
 ```
 
 #### **Detección de Conexión SSH**
+
 ```
 alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"SSH connection from external network"; flow:to_server,established; content:"SSH-2.0"; sid:1000005;)
 ```
 
 #### **Detección de DNS Tunneling**
+
 ```
 alert dns any any -> any any (msg:"Suspicious DNS query - potential tunneling"; dns_query; content:".onion"; nocase; sid:1000006;)
 ```
 
 ### 6.5. Modificadores de Contenido
 
-- `nocase` - Ignora mayúsculas/minúsculas
-- `depth:10` - Busca solo en los primeros 10 bytes
-- `offset:5` - Comienza la búsqueda después de 5 bytes
-- `distance:5` - Distancia desde el match anterior
-- `within:10` - Dentro de los próximos 10 bytes
+* `nocase` - Ignora mayúsculas/minúsculas
+* `depth:10` - Busca solo en los primeros 10 bytes
+* `offset:5` - Comienza la búsqueda después de 5 bytes
+* `distance:5` - Distancia desde el match anterior
+* `within:10` - Dentro de los próximos 10 bytes
 
 ### 6.6. Variables de Red Personalizadas
 
