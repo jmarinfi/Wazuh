@@ -77,7 +77,7 @@ Editar el archivo `/etc/suricata/suricata.yaml` para ajustar la configuración:
 vars:
   address-groups:
     HOME_NET: "[192.168.1.0/24]"
-    EXTERNAL_NET: "!$HOME_NET"
+    EXTERNAL_NET: "any"
 
 default-rule-path: /etc/suricata/rules
 rule-files:
