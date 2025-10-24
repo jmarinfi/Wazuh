@@ -155,8 +155,6 @@ En el dashboard de Wazuh, filtrar por `rule.groups: suricata` y verificar los ca
 * `data.dest_ip`: `192.168.1.135`
 * `data.src_ip`: IP del equipo atacante
 
-
-
 ---
 
 ## 4. Simulación de Ataque: Reflected XSS
