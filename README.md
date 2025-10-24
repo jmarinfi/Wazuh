@@ -21,3 +21,9 @@ A medida que se exploren nuevas funcionalidades, se añadirán nuevos documentos
 * Detección de malware y rootkits.
 * Análisis de logs y respuesta activa.
 * Evaluación de vulnerabilidades.
+
+## Guía de Pruebas
+
+* [01: Instalación del Servidor, Agente e Integración con Suricata](Intrusion_Detection_System_IDS/01_Instalacion_Integracion_Suricata.md)
+* [02: Detección de Ataques Web (SQLi y XSS) con DVWA](Intrusion_Detection_System_IDS/02_Deteccion_Ataques_Web_DVWA.md)
+* [03: Detección con tmNIDS y Wazuh](Intrusion_Detection_System_IDS/03_Deteccion_NIDS_con_tmNIDS.md)
