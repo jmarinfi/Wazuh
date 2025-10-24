@@ -4,6 +4,8 @@
 
 El objetivo principal de este repositorio es servir como una bitácora de aprendizaje y guía práctica para la plataforma de seguridad **Wazuh**.
 
+La documentación se basa en los laboratorios y casos de uso del libro **"Security Monitoring with Wazuh"**, contrastados y complementados con la **documentación oficial de Wazuh** y las guías de integración de herramientas como **Suricata**.
+
 La función de este espacio es documentar de forma detallada:
 
 * El proceso de **instalación** de los componentes de Wazuh (Servidor, Indexer, Dashboard y Agentes).
