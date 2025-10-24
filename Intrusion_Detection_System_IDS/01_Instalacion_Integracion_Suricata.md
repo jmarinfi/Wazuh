@@ -123,13 +123,13 @@ sudo systemctl restart wazuh-agent
 
 Una regla de Suricata sigue el siguiente formato:
 
-```
+```text
 acción protocolo ip_origen puerto_origen -> ip_destino puerto_destino (opciones;)
 ```
 
 **Ejemplo básico:**
 
-```
+```text
 alert tcp any any -> 192.168.1.0/24 22 (msg:"SSH connection detected"; sid:1000001;)
 ```
 
@@ -169,7 +169,7 @@ Tipo de protocolo de red:
 
 Descripción de la alerta:
 
-```
+```text
 msg:"Descripción del ataque detectado";
 ```
 
@@ -177,7 +177,7 @@ msg:"Descripción del ataque detectado";
 
 Identificador único de la regla:
 
-```
+```text
 sid:1000001;
 ```
 
@@ -185,7 +185,7 @@ sid:1000001;
 
 Busca contenido específico en el payload:
 
-```
+```text
 content:"GET"; content:"/admin";
 ```
 
@@ -193,7 +193,7 @@ content:"GET"; content:"/admin";
 
 Dirección del flujo de tráfico:
 
-```
+```text
 flow:to_server,established;  # Tráfico hacia el servidor en conexión establecida
 flow:to_client;              # Tráfico hacia el cliente
 flow:from_server;            # Tráfico desde el servidor
@@ -203,7 +203,7 @@ flow:from_server;            # Tráfico desde el servidor
 
 Categoriza el tipo de ataque:
 
-```
+```text
 classtype:web-application-attack;
 classtype:trojan-activity;
 classtype:policy-violation;
@@ -213,31 +213,31 @@ classtype:policy-violation;
 
 #### **Detección de Escaneo de Puertos**
 
-```
+```text
 alert tcp any any -> $HOME_NET any (msg:"Potential port scan detected"; flags:S; threshold: type both, track by_src, count 10, seconds 60; sid:1000002;)
 ```
 
 #### **Detección de SQL Injection**
 
-```
+```text
 alert tcp any any -> $HOME_NET [80,443,8080] (msg:"SQL Injection attempt detected"; content:"UNION SELECT"; nocase; classtype:web-application-attack; sid:1000003;)
 ```
 
 #### **Detección de XSS**
 
-```
+```text
 alert tcp any any -> $HOME_NET [80,443] (msg:"XSS attempt detected"; content:"<script>"; nocase; classtype:web-application-attack; sid:1000004;)
 ```
 
 #### **Detección de Conexión SSH**
 
-```
+```text
 alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"SSH connection from external network"; flow:to_server,established; content:"SSH-2.0"; sid:1000005;)
 ```
 
 #### **Detección de DNS Tunneling**
 
-```
+```text
 alert dns any any -> any any (msg:"Suspicious DNS query - potential tunneling"; dns_query; content:".onion"; nocase; sid:1000006;)
 ```
 
