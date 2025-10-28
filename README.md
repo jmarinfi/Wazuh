@@ -29,3 +29,4 @@ A medida que se exploren nuevas funcionalidades, se añadirán nuevos documentos
 * [03: Detección con tmNIDS y Wazuh](Intrusion_Detection_System_IDS/03_Deteccion_NIDS_con_tmNIDS.md)
 * [04: Detección de Malware con FIM](Intrusion_Detection_System_IDS/04_Deteccion_Malware_con_FIM.md)
 * [05: Detección de Malware con Listas CDB](Intrusion_Detection_System_IDS/05_Deteccion_Malware_CDB_List)
+* [06: Integración de Wazuh con VirusTotal](Intrusion_Detection_System_IDS/06_Integracion_Virustotal)
